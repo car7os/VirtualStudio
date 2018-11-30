@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) Carlos Vilela
+ * Engenharia de Computação
+ * VirtualStudio
+ * 
+ * Esta Classe destina-se a somente executar o comando Shutdown nos principais Sistemas Operacionais,
+ * como, por exemplo Windows, Linux e Mac
+ */
+
+
 package funcionalidades.hardware;
 
 import java.io.IOException;
@@ -6,6 +16,11 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import org.apache.commons.lang.SystemUtils;
+
+
+//+------------------------------------+
+//| Classe Shutdown                    |
+//+------------------------------------+
 
 public class Shutdown {
 
@@ -43,3 +58,4 @@ public class Shutdown {
 	}
 
 }
+//+------------------------------------+

@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Properties;
 import org.apache.commons.lang.SystemUtils;
 
-import funcionalidades.hardware.Shutdown;
+import funcionalidades.executar.*;
 
 //+------------------------------------------+
 //| Classe Principal                         |
@@ -22,17 +22,7 @@ import funcionalidades.hardware.Shutdown;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		
 		System.out.println(">> Inicializando");
-		
-		
-		
-
-		
-		Shutdown t = new Shutdown();
-		
-		t.start();
-		
 	}
 
 }
