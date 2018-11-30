@@ -11,20 +11,20 @@ public class Shutdown {
 
 	public void start() {
 
-		String comando;
-		ArrayList<String> parametros;
+		ArrayList<String> comando;
 		ProcessBuilder processo;
 
-		comando = "shutdown";
-		parametros = new ArrayList<String>();
+		comando = new ArrayList<String>();
+		comando.add("shutdown"); // Comando principal
 
+		// Parametros conforme o Sistema Operacional
 		if (SystemUtils.IS_OS_WINDOWS) {
-			parametros.add("-s");
-			parametros.add("-f");
+			comando.add("-s");
+			comando.add("-f");
 		} else {
 			if (SystemUtils.IS_OS_LINUX || SystemUtils.IS_OS_MAC) {
-				parametros.add("-h");
-				parametros.add("now");
+				comando.add("-h");
+				comando.add("now");
 			} else {
 				JOptionPane.showMessageDialog(null,
 						"O seu Sistema Operacional não é compatível\nFunciona apenas em Windows, Linux e Mac.",
@@ -32,9 +32,10 @@ public class Shutdown {
 			}
 		}
 
-		processo = new ProcessBuilder("shutdown", "-s", "-f");
+		// Incluir comando no Processo
+		processo = new ProcessBuilder(comando);
 		try {
-			processo.start();
+			processo.start(); // Executar Processo
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, e, "Erro ao Desligar", JOptionPane.WARNING_MESSAGE);
 		}
