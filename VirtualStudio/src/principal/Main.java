@@ -33,15 +33,17 @@ public class Main {
 		
 		p1.play("C:\\Users\\root\\Desktop\\Unidade de USB\\A (6) Informativo.mp3");
         Thread.currentThread().sleep(5000);
-
         p1.start();
 		p1.fade();
 
-		//p2.play("C:\\Users\\root\\Desktop\\Unidade de USB\\A (9).mp3");
-	     Thread.currentThread().sleep(5000);
-			p1.play("C:\\Users\\root\\Desktop\\Unidade de USB\\A (6) Informativo.mp3");
-			
-			//p1.fade();
+		p2.play("C:\\Users\\root\\Desktop\\Unidade de USB\\A (9).mp3");
+	     Thread.currentThread().sleep(15000);
+	     p2.start();
+	     p2.fade();
+
+	     p1.play("C:\\Users\\root\\Desktop\\Unidade de USB\\A (6) Informativo.mp3");
+	     p1.start();
+	     p1.fade();
 
 		/*   
 		p2.play("C:\\Users\\root\\Desktop\\Unidade de USB\\A (9).mp3");
