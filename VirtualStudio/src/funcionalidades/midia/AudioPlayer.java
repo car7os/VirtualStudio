@@ -2,68 +2,84 @@ package funcionalidades.midia;
 
 import java.io.File;
 
-import javax.net.ssl.SSLEngineResult.Status;
-
 import com.sun.javafx.application.PlatformImpl;
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
-public class AudioPlayer {
+
+public class AudioPlayer extends Thread{
 
 	private File arquivo;
-
 	private Media midia;
 	private MediaPlayer player;
+	
+	private boolean flag;
+	
 
-	public AudioPlayer(String arquivo) {
-		this.arquivo = null;
-		this.midia = null;
-		this.player = null;
+	public AudioPlayer() {
+		PlatformImpl.startup(() -> {});
+		flag = false;
+	}
 
-		PlatformImpl.startup(() -> {
-		});
 
-		this.arquivo = new File(arquivo);
+	public void play(String audio) throws InterruptedException{
+
+		while(flag) {
+			sleep(2000);
+		}
+
+		this.arquivo = new File(audio);
 		this.midia = new Media(this.arquivo.toURI().toASCIIString());
 		this.player = new MediaPlayer(midia);
-		this.player.setVolume(1.00);
+		this.player.setVolume(1);
+		player.play();
+
+	}
+	
+	
+	public void fade() {
+		flag = true;
 	}
 
-	public void finalize() {
-		PlatformImpl.exit();
-	}
+    public void run(){
+    	
+    	while(flag) {
+    	
+    	try {
+    	
+		System.out.println(player.getVolume());
 
-	public void setTempo(float tempo) {
-	}
-
-	public float getTempo() {
-		return 0;
-	}
-
-	public float duracao() {
-		return 0;
-	}
-
-	public void play() {
-		this.player.play();
-	}
-
-	public void stop() throws InterruptedException {
+		double progresso;
 		
-		while(this.player.getVolume()>0) {
+		for(int i = 100; i>=0; i--) {
 			
-			System.out.println(this.player.getVolume());
-			Thread.currentThread();
-			Thread.sleep(6*10);
-			
-			this.player.setVolume(this.player.getVolume()-0.01);
-		}
-		
-		this.player.stop();
-	}
+			progresso = i;
+    		Thread.currentThread();
+				Thread.sleep(60);
+				
+			System.out.println(player.getVolume());
+    		player.setVolume(progresso/100);
+    	}
 
-	public void pause() {
-		this.player.pause();
-	}
+		
+		
+		System.out.println("fim> "+player.getVolume());
+		player.pause();
+		flag = false;
+		player.stop();
+		 
+    	}catch(InterruptedException e) {
+        	player.stop();
+
+    	}
+    	}
+    	
+    	
+    	
+      }
 
 }

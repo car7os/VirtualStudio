@@ -11,6 +11,10 @@ package principal;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.lang.SystemUtils;
 
 import funcionalidades.midia.*;
@@ -23,19 +27,34 @@ public class Main {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		System.out.println(">> Inicializando");
+
+		AudioPlayer p1 = new AudioPlayer();
+		AudioPlayer p2 = new AudioPlayer();
 		
-		AudioPlayer p1,p2;
-		
-		p1= new AudioPlayer("C:\\Users\\root\\Desktop\\Unidade de USB\\A (2).mp3");
-		p1.play();
-		Thread.currentThread();
-		Thread.sleep(7000);
-		p1.stop();
-		p2= new AudioPlayer("C:\\Users\\root\\Desktop\\Unidade de USB\\A (1).mp3");
-		p2.play();
-	
-		
-		
+		p1.play("C:\\Users\\root\\Desktop\\Unidade de USB\\A (6) Informativo.mp3");
+        Thread.currentThread().sleep(5000);
+
+        p1.start();
+		p1.fade();
+
+		//p2.play("C:\\Users\\root\\Desktop\\Unidade de USB\\A (9).mp3");
+	     Thread.currentThread().sleep(5000);
+			p1.play("C:\\Users\\root\\Desktop\\Unidade de USB\\A (6) Informativo.mp3");
+			
+			//p1.fade();
+
+		/*   
+		p2.play("C:\\Users\\root\\Desktop\\Unidade de USB\\A (9).mp3");
+        Thread.currentThread().sleep(5000);
+		p1.play("C:\\Users\\root\\Desktop\\Unidade de USB\\A (6) Informativo.mp3");
+       */ 
+        
+		/*
+		ExecutorService executorService = Executors.newCachedThreadPool();
+		executorService.execute(p);
+		*/
+
+
 	}
 
 }
