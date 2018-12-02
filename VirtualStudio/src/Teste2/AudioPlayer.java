@@ -1,4 +1,4 @@
-package funcionalidades.midia;
+package Teste2;
 
 import java.io.File;
 
@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 
-public class AudioPlayer extends Thread{
+public class AudioPlayer implements Runnable{
 
 	private File arquivo;
 	private Media midia;
@@ -21,7 +21,7 @@ public class AudioPlayer extends Thread{
 	
 
 	public AudioPlayer() {
-		PlatformImpl.startup(() -> {});
+		//PlatformImpl.startup(() -> {});
 		flag = false;
 	}
 
@@ -29,7 +29,7 @@ public class AudioPlayer extends Thread{
 	public void play(String audio) throws InterruptedException{
 
 		while(flag) {
-			sleep(2000);
+		     Thread.currentThread().sleep(15000);
 		}
 
 		this.arquivo = new File(audio);
@@ -41,12 +41,15 @@ public class AudioPlayer extends Thread{
 	}
 	
 	
-	public void fade() {
+	public Runnable fade() {
 		flag = true;
+		return null;
 	}
 
     public void run(){
     	
+    	
+
     	while(flag) {
     	
     	try {
@@ -71,13 +74,17 @@ public class AudioPlayer extends Thread{
 		player.pause();
 		flag = false;
 		player.stop();
+    	PlatformImpl.exit();
+
 		 
     	}catch(InterruptedException e) {
+    		player.pause();
         	player.stop();
+        	PlatformImpl.exit();
 
     	}
     	}
-    	
+
     	
     	
       }
